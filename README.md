@@ -59,7 +59,7 @@ Templates are capped at 16 megapixels (iOS Safari's canvas limit) — e.g. 4000 
 
 ## Deploying (Vercel + Neon + R2)
 
-1. **Postgres:** create a Neon project (or add Neon from the Vercel Marketplace). Set `DATABASE_URL` (pooled) and `DIRECT_URL` (direct) and run `npx prisma migrate deploy` once — or add it to the build command: `prisma migrate deploy && next build`.
+1. **Postgres:** create a Neon project (or add Neon from the Vercel Marketplace). Set `DATABASE_URL` (pooled) and `DIRECT_URL` (direct). Vercel builds with `scripts/vercel-build.sh` (set in `vercel.json`), which runs `prisma migrate deploy` on production deploys only, so the schema is created on the first deploy and kept current after.
 2. **R2:** create a bucket and an API token with Object Read & Write on it. Set `R2_ENDPOINT` (`https://<account-id>.r2.cloudflarestorage.com`), `R2_BUCKET`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`.
    - **CORS** (bucket → Settings → CORS policy) — required so browsers can upload and canvases can read images:
      ```json
